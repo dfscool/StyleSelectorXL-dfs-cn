@@ -113,7 +113,7 @@ class StyleSelectorXL(scripts.Script):
     styleNames = getStyles()
 
     def title(self):
-        return "Style Selector for SDXL 1.0"
+        return "画风选择器 SDXL 1.0"
 
     def show(self, is_img2img):
         return scripts.AlwaysVisible
@@ -125,28 +125,28 @@ class StyleSelectorXL(scripts.Script):
                 with FormRow():
                     with FormColumn(min_width=160):
                         is_enabled = gr.Checkbox(
-                            value=enabled, label="Enable Style Selector", info="Enable Or Disable Style Selector ")
+                            value=enabled, label="启用风格选择器", info="是否使用风格选择器")
                     with FormColumn(elem_id="Randomize Style"):
                         randomize = gr.Checkbox(
-                            value=False, label="Randomize Style", info="This Will Override Selected Style")
+                            value=False, label="随机风格", info="勾选后覆盖西面的风格选择")
                     with FormColumn(elem_id="Randomize For Each Iteration"):
                         randomizeEach = gr.Checkbox(
-                            value=False, label="Randomize For Each Iteration", info="Every prompt in Batch Will Have Random Style")
+                            value=False, label="每次使用随机选择的风格", info="每组提示词将配合随机的风格")
 
                 with FormRow():
                     with FormColumn(min_width=160):
                         allstyles = gr.Checkbox(
-                            value=False, label="Generate All Styles In Order", info="To Generate Your Prompt in All Available Styles, Its Better to set batch count to " + str(len(self.styleNames)) + " ( Style Count)")
+                            value=False, label="按顺序生成所有风格的图片", info="为了生成全部风格,最好总批次设置为 " + str(len(self.styleNames)) + " ( 风格总数)")
 
                 style_ui_type = shared.opts.data.get(
                     "styles_ui",  "radio-buttons")
 
                 if style_ui_type == "select-list":
                     style = gr.Dropdown(
-                        self.styleNames, value='base', multiselect=False, label="Select Style")
+                        self.styleNames, value='基础（默认）', multiselect=False, label="选择一种风格")
                 else:
                     style = gr.Radio(
-                        label='Style', choices=self.styleNames, value='base')
+                        label='风格', choices=self.styleNames, value='基础（默认）')
 
         # Ignore the error if the attribute is not present
 
